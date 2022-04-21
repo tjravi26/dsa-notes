@@ -2,22 +2,22 @@
 # Return the head of the new linked list.
 
 
+class SinglyLinkedListNode:
+    def __init__(self, node_data):
+        self.data = node_data
+        self.next = None
+
+
 def mergeLists(head1, head2):
-    # Both lists are None
-    if head1 is None and head2 is None:
-        return None
-
-    # Only one list is None
-    if head1 is None:
-        return head2
-    if head2 is None:
-        return head1
-
-    # General logic
-    if head1.data < head2.data:
-        temp = head1
-        temp.next = mergeLists(head1.next, head2)
-    else:
-        temp = head2
-        temp.next = mergeLists(head1, head2.next)
-    return temp
+    # Create an empty node and assign a variable
+    temp = dummy = SinglyLinkedListNode(0)
+    while head1 and head2:
+        if head1.data < head2.data:
+            temp.next = head1
+            head1 = head1.next
+        else:
+            temp.next = head2
+            head2 = head2.next
+        temp = temp.next
+    temp.next = head1 or head2
+    return dummy.next  # Because dummy = 0 and dummy.next points to the head.
